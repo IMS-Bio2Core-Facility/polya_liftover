@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2021-11-22)
+### Feature
+* **repo:** Initialise project ([`46146d8`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/46146d8a49c80510e661048d5c28d80734a27673))
+
 ## v0.1.1 (2021-11-02)
 ### Fix
 * **config:** Correct sample name ([`d22da64`](https://github.com/IMS-Bio2Core-Facility/single_snake_sequencing/commit/d22da64075de0a7635003d1c56e6f0af93dd34ad))
