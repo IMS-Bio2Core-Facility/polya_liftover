@@ -1,40 +1,60 @@
-# No conda env used as cellranger cannot be installed in one
-rule counts:
+rule index_genome:
     input:
-        unpack(get_sample_reads),
-        bin=rules.get_cellranger.output.bin,
-        genome=rules.get_reference.output.dir,
+        fa=rules.get_fa.output.fa,
+        gtf=rules.get_gtf.output.gtf,
     output:
-        results=directory("results/counts/{sample}/outs/raw_feature_bc_matrix"),
-        mtx="results/counts/{sample}/outs/raw_feature_bc_matrix/matrix.mtx.gz",
-        html=report(
-            "results/counts/{sample}/outs/web_summary.html",
-            caption="../reports/counts.rst",
-            category="Cellranger Counts",
-            subcategory="{sample}",
-        ),
-    params:
-        introns=convert_introns(),
-        n_cells=config["counts"]["n_cells"],
-        mem=config["counts"]["mem"],
+        directory=directory("resources/star_genome"),
     log:
-        "results/logs/counts/{sample}.log",
+        "results/logs/index_genome/index_genome.log",
     benchmark:
-        "results/benchmarks/counts/{sample}.txt"
+        "results/benchmarks/index_genome/index_genome.txt"
+    conda:
+        "../envs/star.yaml"
     threads: 16
     shell:
-        """
-        {input.bin} \
-        count \
-        --nosecondary \
-        {params.introns} \
-        --id {wildcards.sample} \
-        --transcriptome {input.genome} \
-        --fastqs data \
-        --sample {wildcards.sample} \
-        --expect-cells {params.n_cells} \
-        --localcores {threads} \
-        --localmem {params.mem} \
-        &> {log} && \
-        mv {wildcards.sample} results/counts/{wildcards.sample}
-        """
+        "STAR "
+        "--runMode genomeGenerate "
+        "--runThreadN {threads} "
+        "--genomeDir {output.directory} "
+        "--genomeFastaFiles {input.fa} "
+        "--sjdbGTFfile {input.gtf} "
+        "--sjdbOverhang 100 "
+        "&> {log}"
+
+
+rule star:
+    input:
+        genome=rules.index_genome.output.directory,
+        R2="data/{sample}_S1_L00{lane}_R2_001.fastq.gz",
+        R1="data/{sample}_S1_L00{lane}_R1_001.fastq.gz",
+        wl=rules.get_whitelist.output.wl,
+    output:
+        logfile="results/star/{sample}_{lane}/Log.final.out",
+        star=directory("results/star/{sample}_{lane}/Solo.out/Gene/raw"),
+    log:
+        "results/logs/star/{sample}_{lane}.log",
+    benchmark:
+        "results/benchmarks/star/{sample}_{lane}.txt"
+    conda:
+        "../envs/star.yaml"
+    threads: 16
+    shell:
+        "STAR "
+        "--runThreadN {threads} "
+        "--runMode alignReads "
+        "--genomeDir {input.genome} "
+        "--readFilesIn {input.R2} {input.R1} "
+        "--readFilesCommand zcat "
+        "--outFileNamePrefix results/star/{wildcards.sample}_{wildcards.lane}/ "
+        "--outSAMtype BAM Unsorted "
+        "--soloType CB_UMI_Simple "
+        "--soloCBwhitelist {input.wl} "
+        "--soloUMIlen 12 "
+        "--soloCellFilter None "
+        "--clipAdapterType CellRanger4 "
+        "--outFilterScoreMin 30 "
+        "--soloCBmatchWLtype 1MM_multi_Nbase_pseudocounts "
+        "--soloUMIfiltering MultiGeneUMI_CR "
+        "--soloUMIdedup 1MM_CR "
+        "--soloFeatures Gene "
+        "&> {log}"

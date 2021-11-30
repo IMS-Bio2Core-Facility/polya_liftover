@@ -1,40 +1,53 @@
-# Downloads and extracts cell ranger
-# The naming and rules ensure that any verion can be used
-rule get_cellranger:
-    output:
-        cr=directory("resources/cellranger"),
-        bin="resources/cellranger/bin/cellranger",
+rule get_whitelist:
     params:
-        url=config["get_cellranger"]["url"],
+        url=config["get_whitelist"]["url"],
+    output:
+        wl="resources/whitelist.txt.gz",
     log:
-        "results/logs/get_cellranger/get_cellranger.log",
+        "results/logs/get_whitelist/get_whitelist.log",
     benchmark:
-        "results/benchmarks/get_cellranger/get_cellranger.txt"
+        "results/benchmarks/get_whitelist/get_whitelist.txt"
     shell:
-        """
-            wget -O resources/cellranger.tar.gz "{params.url}" &> {log}
-        tar -xzf resources/cellranger.tar.gz -C resources &> {log} && \
-        rm -rf resources/cellranger.tar.gz
-        mv resources/cellranger-* resources/cellranger
-        """
+        "wget "
+        "--no-verbose "
+        "-O {output.wl} "
+        "{params.url} "
+        "&> {log}"
 
 
-rule get_reference:
-    output:
-        dir=directory("resources/genome"),
+rule get_gtf:
+    # No env provide as runs in container
     params:
-        url=config["get_reference"]["url"],
+        url=config["get_gtf"]["url"],
+    output:
+        gtf="resources/mus_musculus.GRCm39.104.gtf",
     log:
-        "results/logs/get_reference/get_reference.log",
+        "results/logs/get_gtf/get_gtf.log",
     benchmark:
-        "results/benchmarks/get_reference/get_reference.txt"
+        "results/benchmarks/get_gtf/get_gtf.txt"
     shell:
-        """
-            wget -O resources/genome.tar.gz "{params.url}" &> {log}
-        tar -xzf resources/genome.tar.gz -C resources &> {log} && \
-        rm -rf resources/genome.tar.gz
-        mv resources/refdata-* resources/genome
-        """
+        "wget "
+        "--no-verbose -O- "
+        "{params.url} | "
+        "gunzip > {output.gtf}"
+        "2> {log}"
+
+
+rule get_fa:
+    params:
+        url=config["get_fa"]["url"],
+    output:
+        fa="resources/mus_musculus.GRCm39.dna.primary_assembly.fa",
+    log:
+        "results/logs/get_fa/get_fa.log",
+    benchmark:
+        "results/benchmarks/get_fa/get_fa.txt"
+    shell:
+        "wget "
+        "--no-verbose -O- "
+        "{params.url} | "
+        "gunzip > {output.fa}"
+        "2> {log}"
 
 
 rule unpack_bcl2fastq:
@@ -47,12 +60,12 @@ rule unpack_bcl2fastq:
     benchmark:
         "results/benchmarks/unpack_bcl2fastq/unpack_bcl2fastq.txt"
     shell:
-        """
-        unzip {input.bcl_zip} -d results/bcl2fastq &> {log}
-        """
+        "unzip "
+        "{input.bcl_zip} "
+        "-d results/bcl2fastq "
+        "&> {log}"
 
 
-# This currently expects names as I receive them from the core
 rule clean_names:
     input:
         get_fastqs,
@@ -63,6 +76,7 @@ rule clean_names:
     benchmark:
         "results/benchmarks/clean_names/{lane}_{sample}_{read}.txt"
     shell:
-        """
-        mv {input} {output} &> {log}
-        """
+        "mv "
+        "{input} "
+        "{output} "
+        "&> {log}"
