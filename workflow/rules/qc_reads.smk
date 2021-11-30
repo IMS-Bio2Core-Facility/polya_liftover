@@ -1,6 +1,6 @@
 rule fastqc:
     input:
-        "data/{sample}_S1_L00{lane}_{read}_001.fastq.gz",
+        get_fastqs,
     output:
         html="results/fastqc/{lane}_{sample}_{read}.html",
         zip="results/fastqc/{lane}_{sample}_{read}_fastqc.zip",
@@ -10,22 +10,22 @@ rule fastqc:
         "results/benchmarks/fastqc/{lane}_{sample}_{read}.txt"
     threads: 5
     wrapper:
-        "0.79.0/bio/fastqc"
+        "0.80.2/bio/fastqc"
 
 
 rule multiqc:
     input:
-        **agg_fastqc(),
+        **agg_fastqc_star(),
         bcl2fastq=rules.unpack_bcl2fastq.output.bcl2fastq,
     output:
         html=report(
             "results/multiqc/multiqc.html",
             caption="../reports/multiqc.rst",
-            category="QC Metrics for Sequencing Reads",
+            category="1. QC Metrics for Sequencing Reads",
         ),
     log:
         "results/logs/multiqc/multiqc.log",
     benchmark:
         "results/benchmarks/fastqc/multiqc.txt"
     wrapper:
-        "0.79.0/bio/multiqc"
+        "0.80.2/bio/fastqc"
