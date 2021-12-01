@@ -7,6 +7,10 @@ properties:
     description: Samplesheet location
     type: string
 
+  lift:
+    description: PolyA_DB Coordinates
+    type: string
+
   get_whitelist:
     description: Step Parametres
     type: object
