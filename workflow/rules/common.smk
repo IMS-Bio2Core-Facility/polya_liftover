@@ -51,7 +51,7 @@ def agg_fastqc_star():
                 f"results/fastqc/{lane}_{sample}_{read}_fastqc.zip"
                 for read in ["R1", "R2"]
             ]
-            star_out = star_out + ["results/star/{sample}_{lane}/Log.final.out"]
+            star_out = star_out + [f"results/star/{sample}_{lane}/Log.final.out"]
     return dict(
         fastqc=fastq_out,
         star=star_out,
