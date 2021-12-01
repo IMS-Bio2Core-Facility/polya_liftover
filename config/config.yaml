@@ -1,5 +1,7 @@
 samples: "config/samples.yaml"
 
+lift: "config/lift.yaml"
+
 get_whitelist:
     url: "https://github.com/10XGenomics/cellranger/raw/master/lib/python/cellranger/barcodes/3M-february-2018.txt.gz"
 

@@ -5,7 +5,12 @@ from yaml import safe_load
 # Validate structures
 with open(config["samples"], "r") as file:
     metadata = safe_load(file)
-validate(metadata, schema="../schema/samples.schema.yaml")
+    validate(metadata, schema="../schema/samples.schema.yaml")
+
+with open(config["lift"], "r") as file:
+    lift = safe_load(file)
+    validate(lift, schema="../schema/lift.schema.yaml")
+
 validate(config, schema="../schema/config.schema.yaml")
 
 # Some useful variables
