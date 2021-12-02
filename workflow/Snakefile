@@ -19,4 +19,4 @@ include: "rules/counts.smk"
 rule report:
     input:
         #        "results/multiqc/multiqc.html",
-        "results/convert_to_bed/input.bed",
+        "results/liftover/10to39.bed",
