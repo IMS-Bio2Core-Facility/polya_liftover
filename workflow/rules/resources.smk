@@ -20,7 +20,7 @@ rule get_gtf:
     params:
         url=config["get_gtf"]["url"],
     output:
-        gtf="resources/mus_musculus.GRCm39.104.gtf",
+        gtf="resources/genome.gtf",
     log:
         "results/logs/get_gtf/get_gtf.log",
     benchmark:
@@ -29,7 +29,7 @@ rule get_gtf:
         "wget "
         "--no-verbose -O- "
         "{params.url} | "
-        "gunzip > {output.gtf}"
+        "gunzip > {output.gtf} "
         "2> {log}"
 
 
@@ -37,7 +37,7 @@ rule get_fa:
     params:
         url=config["get_fa"]["url"],
     output:
-        fa="resources/mus_musculus.GRCm39.dna.primary_assembly.fa",
+        fa="resources/genome.primary_assembly.fa",
     log:
         "results/logs/get_fa/get_fa.log",
     benchmark:
