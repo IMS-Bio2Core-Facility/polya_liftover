@@ -35,9 +35,27 @@ properties:
     required: [ url ]
     additionalProperties: false
 
+  get_9_to_10:
+    description: Step Parametres
+    type: object
+    properties:
+      url: { type: string }
+    required: [ url ]
+    additionalProperties: false
+
+  get_10_to_39:
+    description: Step Parametres
+    type: object
+    properties:
+      url: { type: string }
+    required: [ url ]
+    additionalProperties: false
+
 additionalProperties: false
 required:
   - samples
   - get_whitelist
   - get_gtf
   - get_fa
+  - get_9_to_10
+  - get_10_to_39

@@ -10,3 +10,9 @@ get_gtf:
 
 get_fa:
     url: "http://ftp.ensembl.org/pub/release-104/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz"
+
+get_9_to_10:
+  url: "ftp://hgdownload.cse.ucsc.edu/goldenPath/mm9/liftOver/mm9Tomm10.over.chain.gz"
+
+get_10_to_39:
+  url: "ftp://hgdownload.cse.ucsc.edu/goldenPath/mm9/liftOver/mm9Tomm39.over.chain.gz"
