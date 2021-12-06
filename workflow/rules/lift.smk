@@ -56,4 +56,8 @@ rule move_coordinates:
     benchmark:
         "results/benchmark/move_coordinates/move_coordinates.txt"
     shell:
-        "workflow/scripts/move_coordinates.bash -b {input.bed} -g {input.gtf} -o {output.gtf}"
+        "workflow/scripts/move_coordinates.bash "
+        "-b {input.bed} "
+        "-g {input.gtf} "
+        "-o {output.gtf} "
+        "&> {log}"

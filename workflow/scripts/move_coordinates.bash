@@ -3,14 +3,15 @@
 set -e
 
 # Get parameters from snakemake
-while getopts "b:g:o:" opt; do
+while getopts ":b:g:o:" opt; do
   case "$opt" in
-    b)  BEDFILE="$OPTARG"
-      ;;
-    g)  GTF="$OPTARG"
-      ;;
-    o)  OUT="$OPTARG"
-      ;;
+    b) BEDFILE="$OPTARG" ;;
+    g) GTF="$OPTARG" ;;
+    o) OUT="$OPTARG" ;;
+    :) echo 'All arguments must be provided' >&2
+       exit 1 ;;
+    \?) echo 'An illegal option was provided' >&2
+        exit 1 ;;
   esac
 done
 
