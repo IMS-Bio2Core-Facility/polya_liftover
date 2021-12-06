@@ -1,4 +1,6 @@
 # Rules for moving inputs to necessary locations/formats
+# These rules operate on files provided by the user
+# To guarantee they meet certain formats, naming conventions, etc.
 
 
 rule unpack_bcl2fastq:
@@ -31,3 +33,18 @@ rule clean_names:
         "{input} "
         "{output} "
         "&> {log}"
+
+
+rule convert_to_bed:
+    params:
+        genes=lift,
+    output:
+        bed="results/convert_to_bed/input.bed",
+    log:
+        "results/logs/convert_to_bed/convert_to_bed.log",
+    benchmark:
+        "results/benchmarks/convert_to_bed/convert_to_bed.txt"
+    conda:
+        "../envs/bare_python.yaml"
+    script:
+        "../scripts/convert_to_bed.py"

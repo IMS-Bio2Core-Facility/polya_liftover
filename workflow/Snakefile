@@ -9,14 +9,14 @@ container: "docker://condaforge/mambaforge:4.10.3-6"
 
 include: "rules/common.smk"
 include: "rules/input_resources.smk"
-include: "rules/star_resources.smk"
 include: "rules/lift_resources.smk"
-include: "rules/qc_reads.smk"
+include: "rules/star_resources.smk"
 include: "rules/lift.smk"
-include: "rules/counts.smk"
+include: "rules/star.smk"
+include: "rules/qc_reads.smk"
 
 
 rule report:
     input:
-        #        "results/multiqc/multiqc.html",
+        "results/multiqc/multiqc.html",
         "resources/genome_converted.gtf",
