@@ -1,7 +1,7 @@
 rule index_genome:
     input:
         fa=rules.get_fa.output.fa,
-        gtf=rules.get_gtf.output.gtf,
+        gtf=rules.move_coordinates.output.gtf,
     output:
         directory=directory("resources/star_genome"),
     log:
