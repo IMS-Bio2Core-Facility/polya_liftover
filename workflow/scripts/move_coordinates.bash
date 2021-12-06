@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -e -x
 
 # Get parameters from snakemake
 while getopts ":b:g:o:" opt; do
