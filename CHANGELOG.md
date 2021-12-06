@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.1 (2021-12-06)
+### Fix
+* **move_coordinates.bash:** Use tmpfiles correctly ([`44df2d0`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/44df2d00d7c2587620011aa54a589b05b62bb052))
+* **convert_to_bed.py:** Add newline ([`8a8dc83`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/8a8dc839870dd0f04cc26328b5d9ad7f6c93edd7))
+* **lift.yaml:** Set lesser coordinate as start ([`62da900`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/62da900a24c365266b726002399eae2ebccc96b2))
+
 ## v1.0.0 (2021-12-06)
 ### Feature
 * **rules:** Add move_coordinate rule ([`f1ec1c4`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/f1ec1c4e0f35f172e8b8d3b31d4b32aef0b29c71))
