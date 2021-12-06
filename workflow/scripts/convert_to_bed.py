@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     with open(OUTPUT["bed"], "w") as file:
         lines = [
-            f"chr{pos['chr']} {pos['start']-1} {pos['end']-1} {name}"
+            f"chr{pos['chr']} {pos['start']-1} {pos['end']-1} {name}\n"
             for name, pos in PARAMS["genes"].items()
         ]
         file.writelines(lines)
