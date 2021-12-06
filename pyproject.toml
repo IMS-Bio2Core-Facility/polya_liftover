@@ -1,5 +1,5 @@
 [tool.version]
-version = "1.0.1"
+version = "1.1.0"
 
 [tool.semantic_release]
 branch = "main"

@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2021-12-06)
+### Feature
+* **move_coordinates.bash:** Set `-x` for improved logging ([`85d88d0`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/85d88d0ff3f9d7b8e7e6b3bb502a4ab9139f80d9))
+
 ## v1.0.1 (2021-12-06)
 ### Fix
 * **move_coordinates.bash:** Use tmpfiles correctly ([`44df2d0`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/44df2d00d7c2587620011aa54a589b05b62bb052))
