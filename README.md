@@ -133,7 +133,7 @@ but we recommend creating a `data` directory in your project for them.
 
 ## Notes on the tools
 
-The analysis pipeline was run using Snakemake v6.6.1.
+The analysis pipeline was run using Snakemake v6.11.1.
 The full version and software lists can be found under the relevant yaml files in `workflow/envs`.
 The all reasonable efforts have been made to ensure that the repository adheres to the best practices
 outlined [here](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html).
@@ -144,7 +144,7 @@ For a full discussion on the analysis methods,
 please see the [technical documentation](workflow/documentation.md).
 
 Briefly,
-gene coordinates were update with [PolyA_DB][polya],
+gene coordinates were updated with [PolyA_DB][polya] version 3,
 converted to more recent builds with [Liftover][liftover],
 built into a reference with [STAR][star],
 and counted with [STARSolo][starsolo].
