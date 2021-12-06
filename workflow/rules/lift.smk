@@ -58,3 +58,17 @@ rule liftover_10to39:
         "{output.bed} "
         "{output.unmapped} "
         "&> {log} "
+
+
+rule move_coordinates:
+    input:
+        bed=rules.liftover_10to39.output.bed,
+        gtf=rules.get_gtf.output.gtf,
+    output:
+        gtf="resources/genome_converted.gtf",
+    log:
+        "results/logs/move_coordinates/move_coordinates.log",
+    benchmark:
+        "results/benchmark/move_coordinates/move_coordinates.txt"
+    shell:
+        "workflow/scripts/move_coordinates.bash -b {input.bed} -g {input.gtf} -o {output.gtf}"
