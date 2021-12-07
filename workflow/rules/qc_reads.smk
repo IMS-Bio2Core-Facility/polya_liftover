@@ -1,6 +1,6 @@
 rule fastqc:
     input:
-        get_fastqs,
+        fastq="data/{sample}_S1_L00{lane}_{read}_001.fastq.gz",
     output:
         html="results/fastqc/{lane}_{sample}_{read}.html",
         zip="results/fastqc/{lane}_{sample}_{read}_fastqc.zip",
