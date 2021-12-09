@@ -11,7 +11,7 @@ properties:
     description: PolyA_DB Coordinates
     type: string
 
-  get_whitelist:
+  get_cellranger:
     description: Step Parametres
     type: object
     properties:
@@ -51,11 +51,22 @@ properties:
     required: [ url ]
     additionalProperties: false
 
+  counts:
+    description: Step Parametres
+    type: object
+    properties:
+      introns: { type: boolean }
+      n_cells: { type: integer }
+      mem: { type: integer }
+    required: [ introns, n_cells, mem ]
+    additionalProperties: false
+
 additionalProperties: false
 required:
   - samples
-  - get_whitelist
+  - get_cellranger
   - get_gtf
   - get_fa
   - get_9_to_10
   - get_10_to_39
+  - counts

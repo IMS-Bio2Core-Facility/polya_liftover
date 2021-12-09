@@ -2,8 +2,8 @@ samples: "config/samples.yaml"
 
 lift: "config/lift.yaml"
 
-get_whitelist:
-    url: "https://github.com/10XGenomics/cellranger/raw/master/lib/python/cellranger/barcodes/3M-february-2018.txt.gz"
+get_cellranger:
+    url: "https://cf.10xgenomics.com/releases/cell-exp/cellranger-6.1.2.tar.gz?Expires=1639086045&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi4xMHhnZW5vbWljcy5jb20vcmVsZWFzZXMvY2VsbC1leHAvY2VsbHJhbmdlci02LjEuMi50YXIuZ3oiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2MzkwODYwNDV9fX1dfQ__&Signature=AJxyMHZyneGUVWSaUd2nL2M9BFYNsiVAI157e~8RmO~jV3MNeaXi21gEhXMIiBT6uQOgBkLma7rWCoS99hCI2BivyD~lDCSn3UW4ty-i7EX2P4fdlyJNqz9vGGzbIKClqgocxcQPTIBRTT3NYyG3h8MdrX-k5vgVIrl2kbzIR3wY9RRLe-cYjN3YhA4OLGBTsg7ye7PRRndeJnThEgia4EmYCm29UZ9vHb0sHiGERvQaOBsv9VBvAMrhNkpTSA76Z3iirhZ9ZTza3Vtskp3JVzKLnfAcZukWD10hV2HmTgo0UQX1EN-SAwETemaHZcb7aKAIHIYHQ0nfjVoTVaaV3Q__&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA"
 
 get_gtf:
     url: "http://ftp.ensembl.org/pub/release-104/gtf/mus_musculus/Mus_musculus.GRCm39.104.gtf.gz"
@@ -16,3 +16,8 @@ get_9_to_10:
 
 get_10_to_39:
   url: "http://hgdownload.soe.ucsc.edu/goldenPath/mm10/liftOver/mm10ToMm39.over.chain.gz"
+
+counts:
+  introns: False
+  n_cells: 10000
+  mem: 32
