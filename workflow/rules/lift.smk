@@ -48,9 +48,9 @@ rule liftover_10to39:
 rule move_coordinates:
     input:
         bed=rules.liftover_10to39.output.bed,
-        gtf=rules.get_gtf.output.gtf,
+        gtf=rules.mkgtf.output.gtf,
     output:
-        gtf=temp("resources/genome_converted.gtf"),
+        gtf="resources/genome.filtered.converted.gtf",
     log:
         "results/logs/move_coordinates/move_coordinates.log",
     benchmark:

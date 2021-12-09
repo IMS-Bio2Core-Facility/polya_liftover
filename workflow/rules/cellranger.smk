@@ -1,40 +1,6 @@
-rule mkgtf:
-    input:
-        gtf=rules.move_coordinates.output.gtf,
-        bin=rules.get_cellranger.output.bin,
-    output:
-        gtf="resources/genome_filtered.gtf",
-    log:
-        "results/logs/mkgtf/mkgtf.log",
-    benchmark:
-        "results/benchmarks/mkgtf/mkgtf.txt"
-    shell:
-        "{input.bin} "
-        "mkgtf "
-        "{input.gtf} "
-        "{output.gtf} "
-        "--attribute=gene_biotype:protein_coding "
-        "--attribute=gene_biotype:lincRNA "
-        "--attribute=gene_biotype:antisense "
-        "--attribute=gene_biotype:IG_LV_gene "
-        "--attribute=gene_biotype:IG_V_gene "
-        "--attribute=gene_biotype:IG_V_pseudogene "
-        "--attribute=gene_biotype:IG_D_gene "
-        "--attribute=gene_biotype:IG_J_gene "
-        "--attribute=gene_biotype:IG_J_pseudogene "
-        "--attribute=gene_biotype:IG_C_gene "
-        "--attribute=gene_biotype:IG_C_pseudogene "
-        "--attribute=gene_biotype:TR_V_gene "
-        "--attribute=gene_biotype:TR_V_pseudogene "
-        "--attribute=gene_biotype:TR_D_gene "
-        "--attribute=gene_biotype:TR_J_gene "
-        "--attribute=gene_biotype:TR_J_pseudogene "
-        "--attribute=gene_biotype:TR_C_gene"
-
-
 rule mkref:
     input:
-        gtf=rules.mkgtf.output.gtf,
+        gtf=rules.move_coordinates.output.gtf,
         fa=rules.get_fa.output.fa,
         bin=rules.get_cellranger.output.bin,
     output:
