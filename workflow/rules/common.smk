@@ -39,8 +39,8 @@ def get_bcl_results():
     )
 
 
-def agg_fastqc_star():
-    """Aggregate input from FASTQC and STAR for MultiQC.
+def agg_fastqc():
+    """Aggregate input from FASTQC for MultiQC.
 
     A simple snakemake expand is not used to avoid the cross product,
     as not all samples will be in all lanes.
@@ -49,15 +49,42 @@ def agg_fastqc_star():
     guarantee we can know this a priori.
     """
     fastq_out = []
-    star_out = []
     for lane, samples in metadata.items():
         for sample in samples.keys():
             fastq_out = fastq_out + [
                 f"results/fastqc/{lane}_{sample}_{read}_fastqc.zip"
                 for read in ["R1", "R2"]
             ]
-            star_out = star_out + [f"results/star/{sample}_{lane}/Log.final.out"]
     return dict(
         fastqc=fastq_out,
-        star=star_out,
     )
+
+
+def agg_cr_html():
+    """Aggregate CellRanger html output.
+
+    A simple snakemake expand is not used to avoid the cross product,
+    as not all samples will be in all lanes.
+
+    A checkpoint could be used. However, wildcard constraints and the sample sheet
+    guarantee we can know this a priori.
+    """
+    cr_out = []
+    for lane, samples in metadata.items():
+        for sample in samples.keys():
+            cr_out = cr_out + [f"results/counts/{sample}_{lane}/outs/web_summary.html"]
+    return dict(
+        cr_html=cr_out,
+    )
+
+
+def convert_introns():
+    """Specify whether introns should be counted
+
+    For ease of use, the user only specifies True or False
+    This function handles the conversion.
+    """
+    if config["counts"]["introns"]:
+        return "--include-introns"
+    else:
+        return ""
