@@ -14,7 +14,8 @@ rule unpack_bcl2fastq:
         "results/logs/unpack_bcl2fastq/unpack_bcl2fastq.log",
     benchmark:
         "results/benchmarks/unpack_bcl2fastq/unpack_bcl2fastq.txt"
-    container: None
+    container:
+        None
     shell:
         "unzip "
         "{input.bcl_zip} "
