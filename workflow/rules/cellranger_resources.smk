@@ -1,21 +1,21 @@
 # Gather input resources for STAR
 
 
-rule get_whitelist:
-    params:
-        url=config["get_whitelist"]["url"],
+rule get_cellranger:
     output:
-        wl="resources/whitelist.txt.gz",
+        cr=directory("resources/cellranger"),
+        bin="resources/cellranger/bin/cellranger",
+    params:
+        url=config["get_cellranger"]["url"],
     log:
-        "results/logs/get_whitelist/get_whitelist.log",
+        "results/logs/get_cellranger/get_cellranger.log",
     benchmark:
-        "results/benchmarks/get_whitelist/get_whitelist.txt"
+        "results/benchmarks/get_cellranger/get_cellranger.txt"
     shell:
-        "wget "
-        "--no-verbose "
-        "-O {output.wl} "
-        "{params.url} "
-        "&> {log}"
+        "wget --no-verbose -O- {params.url} | "
+        "tar -xzf - -C resources && "
+        "rm -rf resources/cellranger.tar.gz && "
+        "mv resources/cellranger-* resources/cellranger "
 
 
 rule get_gtf:
