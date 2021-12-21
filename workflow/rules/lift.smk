@@ -54,7 +54,7 @@ rule move_coordinates:
     log:
         "results/logs/move_coordinates/move_coordinates.log",
     benchmark:
-        "results/benchmark/move_coordinates/move_coordinates.txt"
+        "results/benchmarks/move_coordinates/move_coordinates.txt"
     shell:
         "workflow/scripts/move_coordinates.bash "
         "-b {input.bed} "
