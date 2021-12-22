@@ -1,4 +1,4 @@
-# Gather input resources for STAR
+# Gather input resources for CellRanger
 
 
 rule get_cellranger:

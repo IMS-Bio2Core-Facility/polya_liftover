@@ -22,6 +22,7 @@ for _, v in metadata.items():
 
 CR_VERSION = re.search("cellranger-\d.\d.\d", config["get_cellranger"]["url"]).group(0)
 
+
 # wildcard restraints - as reads can only be R1 or R2
 wildcard_constraints:
     read="R[12]",
