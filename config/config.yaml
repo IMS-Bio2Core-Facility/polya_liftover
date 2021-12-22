@@ -18,6 +18,6 @@ get_10_to_39:
   url: "http://hgdownload.soe.ucsc.edu/goldenPath/mm10/liftOver/mm10ToMm39.over.chain.gz"
 
 counts:
-  introns: False
+  introns: True
   n_cells: 10000
-  mem: 32
+  mem: 490
