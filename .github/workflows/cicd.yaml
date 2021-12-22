@@ -66,33 +66,10 @@ jobs:
           # - name: Snakemake integration tests
           # run: pytest .tests/integration
 
-  R_check:
-    # There is a cacheable install, but it requires a proper R package
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: "4.1.1"
-          use-public-rspm: true
-      - name: Install Dependencies
-        run: install.packages(c("lintr", "styler"))
-        shell: Rscript {0}
-      - name: lintr
-        run: lintr::lint_dir()
-        shell: Rscript {0}
-      - name: styler
-        run: styler::style_dir()
-        shell: Rscript {0}
-
   release:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [py_check, snake_check, R_check]
+    needs: [py_check, snake_check]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
