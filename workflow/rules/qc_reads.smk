@@ -8,7 +8,7 @@ rule fastqc:
         "results/logs/fastqc/{lane}_{sample}_{read}.log",
     benchmark:
         "results/benchmarks/fastqc/{lane}_{sample}_{read}.txt"
-    threads: 5
+    threads: 10
     wrapper:
         "0.80.2/bio/fastqc"
 
