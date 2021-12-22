@@ -21,7 +21,6 @@ for _, v in metadata.items():
     SAMPLES = SAMPLES.union(v.keys())
 
 CR_VERSION = re.search("cellranger-\d.\d.\d", config["get_cellranger"]["url"]).group(0)
-print(CR_VERSION)
 
 # wildcard restraints - as reads can only be R1 or R2
 wildcard_constraints:
