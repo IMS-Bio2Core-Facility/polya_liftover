@@ -4,7 +4,9 @@ rule mkref:
         fa=rules.get_fa.output.fa,
         bin=rules.get_cellranger.output.bin,
     output:
-        ref=directory("resources/ref_genome"),
+        ref=directory("resources/converted_filtered_genome"),
+    params:
+        mem=config["counts"]["mem"],
     log:
         "results/logs/mkref/mkref.log",
     benchmark:
@@ -12,9 +14,12 @@ rule mkref:
     shell:
         "{input.bin} "
         "mkref "
-        "--genome={output.ref} "
+        "--genome=converted_filtered_genome "
         "--genes={input.gtf} "
         "--fasta={input.fa} "
+        "--memgb={params.mem} "
+        "&> {log} && "
+        "mv converted_filtered_genome {output.ref} "
 
 
 rule count:
@@ -40,7 +45,7 @@ rule count:
         "results/logs/counts/{sample}_{lane}.log",
     benchmark:
         "results/benchmarks/counts/{sample}_{lane}.txt"
-    threads: 16
+    threads: 76
     shell:
         "{input.bin} "
         "count "
@@ -55,4 +60,5 @@ rule count:
         "--localcores {threads} "
         "--localmem {params.mem} "
         "&> {log} && "
-        "mv {wildcards.sample}_{wildcards.lane} results/counts/{wildcards.sample}_{wildcards.lane} "
+        "rm -rf results/counts/{wildcards.sample}_{wildcards.lane} && "
+        "mv {wildcards.sample}_{wildcards.lane} results/counts "
