@@ -3,8 +3,6 @@
 # To guarantee they meet certain formats, naming conventions, etc.
 
 
-# Disable container
-# Mambaforge doesn't have zip, and busybox requires authentication to pull
 rule unpack_bcl2fastq:
     input:
         **get_bcl_results(),
@@ -14,8 +12,8 @@ rule unpack_bcl2fastq:
         "results/logs/unpack_bcl2fastq/unpack_bcl2fastq.log",
     benchmark:
         "results/benchmarks/unpack_bcl2fastq/unpack_bcl2fastq.txt"
-    container:
-        None
+    conda:
+        "../envs/unpack_bcl2fastq.yaml"
     shell:
         "unzip "
         "{input.bcl_zip} "

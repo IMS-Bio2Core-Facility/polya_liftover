@@ -6,7 +6,7 @@ channels:
 dependencies:
   - snakemake==6.11.1
   - ucsc-liftover==377
-  - star==2.7.9a
+  - unzip==6.0
   - nox
   - pre-commit
   - pytest

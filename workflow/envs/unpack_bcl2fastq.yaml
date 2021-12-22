@@ -1,0 +1,7 @@
+name: unpack_bcl2fastq
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - unzip==6.0
