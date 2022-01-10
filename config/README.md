@@ -34,9 +34,9 @@ This defaults to `config/samples.yaml`.
 Path to the "lift sheet" - the PolyA-DB outputs.
 This defaults to `config/lift.yaml`.
 
-### get_whitelist
+### get_cellranger
 
-- url: str, required. Url to retrieve cell barcode whitelist for STAR.
+- url: str, required. Url to retrive the CellRanger binary.
 
 ### get_gtf
 
@@ -53,5 +53,11 @@ This defaults to `config/lift.yaml`.
 ### get_10_to_39
 
 - url: str, required. Url to retrieve the `mm10` to `mm39` over.chain for `LiftOver`
+
+### cellranger
+
+- introns: bool, required. Whether or not to include introns in the allignment. Essentially specifies if the data is single-nucleus or single cell.
+- n_cells: int, required. The number of cells to expect in the sample.
+- mem: int, required. The local memory, in Gb, available to CellRanger.
 
 [schema]: https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#validation "Schema Validation"
