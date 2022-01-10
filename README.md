@@ -1,19 +1,19 @@
-# single_snake_sequencing - sc/snRNAseq Snakemake Workflow
+# BIC092 - sc/snRNAseq Snakemake Workflow
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![CI/CD](https://github.com/IMS-Bio2Core-Facility/single_snake_sequencing/actions/workflows/cicd.yaml/badge.svg)](https://github.com/IMS-Bio2Core-Facility/single_snake_sequencing/actions/workflows/cicd.yaml)
+[![CI/CD](https://github.com/IMS-Bio2Core-Facility/BIC092/actions/workflows/cicd.yaml/badge.svg)](https://github.com/IMS-Bio2Core-Facility/BIC092/actions/workflows/cicd.yaml)
 [![Codestyle: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Codestyle: snakefmt](https://img.shields.io/badge/code%20style-snakefmt-000000.svg)](https://github.com/snakemake/snakefmt)
 
-A [Snakemake][sm] workflow for using USCS Liftover with STAR.
+A [Snakemake][sm] workflow for using USCS Liftover with Cellranger.
 
 Some genes are not accurately annotated in the reference genome.
 Here,
 we use information provide by the [PolyA_DB v3.2][polya] to update the coordinates,
 then the [USCS Liftover][liftover] tool to update to a more recent genome.
 Next,
-we use [STAR][star] to create the reference and count matrix.
+we use [Cellranger][cr] to create the reference and count matrix.
 Finally,
 by taking advantage of the integrated [Conda][conda] and [Singularity][sing] support,
 we can run the whole thing in an isolated environment.
@@ -136,7 +136,7 @@ but we recommend creating a `data` directory in your project for them.
 The analysis pipeline was run using Snakemake v6.11.1.
 The full version and software lists can be found under the relevant yaml files in `workflow/envs`.
 The all reasonable efforts have been made to ensure that the repository adheres to the best practices
-outlined [here](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html).
+outlined [here][sm_bp].
 
 ## Notes on the analysis
 
@@ -146,16 +146,15 @@ please see the [technical documentation](workflow/documentation.md).
 Briefly,
 gene coordinates were updated with [PolyA_DB][polya] version 3,
 converted to more recent builds with [Liftover][liftover],
-built into a reference with [STAR][star],
-and counted with [STARSolo][starsolo].
+and referenced/counted with [Cellranger][cr].
 
 [sm]: https://snakemake.readthedocs.io/en/stable/index.html "Snakemake"
 [polya]: https://exon.apps.wistar.org/polya_db/v3/index.php "PolyA_DB"
 [liftover]: https://genome.ucsc.edu/cgi-bin/hgLiftOver "Liftover"
-[star]: https://github.com/alexdobin/STAR "STAR"
+[cr]: https://github.com/alexdobin/STAR "Cellranger"
 [conda]: https://docs.conda.io/en/latest/ "Conda"
 [sing]: https://sylabs.io/singularity/ "Singularity"
 [mambaforge]: https://github.com/conda-forge/miniforge#mambaforge "Mambaforge"
 [sing_install]: https://sylabs.io/guides/3.8/admin-guide/installation.html#installation-on-windows-or-mac "Singularity Install"
 [releases]: https://github.com/IMS-Bio2Core-Facility/BIC092/releases "Releases"
-[starsolo]: https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md "STARSolo"
+[sm_bp]: https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html "Best Practices"
