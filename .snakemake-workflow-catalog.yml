@@ -1,7 +1,7 @@
 usage:
   mandatory-flags:
-    desc: In order to take advantage of GPU acceleration, Singularity must be made aware of Nvidia
-    flags: "--singularity-args='--nv'"
+    desc: No additional flags are necessary
+    flags:
   software-stack-deployment:
     conda: true
     singularity: true
