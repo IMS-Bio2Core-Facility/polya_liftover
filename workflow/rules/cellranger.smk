@@ -33,7 +33,7 @@ rule count:
         mtx="results/counts/{sample}_{lane}/outs/raw_feature_bc_matrix/matrix.mtx.gz",
         html=report(
             "results/counts/{sample}_{lane}/outs/web_summary.html",
-            caption="../reports/counts.rst",
+            caption="../report/counts.rst",
             category="2. Cellranger Counts",
             subcategory="{sample}_{lane}",
         ),

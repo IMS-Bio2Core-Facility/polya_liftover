@@ -20,7 +20,7 @@ rule multiqc:
     output:
         html=report(
             "results/multiqc/multiqc.html",
-            caption="../reports/multiqc.rst",
+            caption="../report/multiqc.rst",
             category="1. QC Metrics for Sequencing Reads",
         ),
     log:
