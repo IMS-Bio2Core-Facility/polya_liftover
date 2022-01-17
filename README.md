@@ -20,28 +20,58 @@ we can run the whole thing in an isolated environment.
 
 ## Notes on Installation
 
-Ourpipeline is available on Github
+Our pipeline is available on Github
 (see below!) and on
 [WorkflowHub][wh].
 
+### Get the Source Code
+
+Navigate to our [release][releases]
+page on github and download the most recent version.
+
+Alternatively,
+for the bleeding edge,
+please clone the repo like so:
+
+```shell
+git clone https://github.com/IMS-Bio2Core-Facility/polya_liftover
+```
+
+> :warning: **Heads Up!**
+> The bleeding edge may not be stable,
+> as it contains all active development.
+
+However you choose to install it,
+`cd` into the directory.
+
 ### Necessary Software
 
-This pipeline needs [conda][conda]
-and [snakemake][sm]
-installed,
-and runs best if you also have [singularity][sing]
-installed,
-though it's not required.
-
+The only thing you need installed is [conda][conda].
 Snakemake recommends using [mambaforge][mambaforge]
 as your base conda,
 which I would also recommend.
 Installation instructions are at the above link.
-If you prefer a vanilla conda installation,
-you can always try `mamba` following the instructions at the above snakemake link.
-Once you have conda installed,
-install snakemake as outlined on their page
-(again, see the above link)
+
+Once `conda` is installed,
+the eastiest way to get up and running is:
+
+```shell
+conda env create -f workflow/envs/devel_linux.yaml
+```
+
+This installs [Snakemake][sm]
+and [Singularity][sing],
+plus all the software used in each step.
+If you are running Windows or MacOS,
+please install using the `workflow/envs/devel.yaml` file.
+This installs everything **except** Singularity,
+as Singularity is only compatible with Linux.
+
+While the above is easiest,
+you don't _technially_ need the software for each step,
+as Conda/Snakemake will download each step's software for you as they run.
+For a barebones installation,
+install [Snakemake][sm] as outlined on their page
 and activate your snakemake environment.
 
 If you are running on a Linux system,
@@ -58,44 +88,6 @@ But don't worry!
 **Singularity is _not_ required!**
 Snakemake will still run each step in its own Conda environment,
 it just won't put each Conda environment in a container.
-
-### Get the Source Code
-
-Navigate to our [release][releases]
-page on github and download the most recent version.
-The following will do the trick:
-
-```shell
-curl -s https://api.github.com/repos/IMS-Bio2Core-Facility/polya_liftover/releases/latest |
-grep tarball_url |
-cut -d " " -f 4 |
-tr -d '",' |
-xargs -n1 curl -sL |
-tar xzf -
-```
-
-After querying the github api to get the most recent release information,
-we grep for the desired URL,
-split the line and extract the field,
-trim superfluous characters,
-use `xargs` to pipe this to `curl` while allowing for re-directs,
-and un-tar the files.
-Easy!
-
-Alternatively,
-for the bleeding edge,
-please clone the repo like so:
-
-```shell
-git clone https://github.com/IMS-Bio2Core-Facility/polya_liftover
-```
-
-> :warning: **Heads Up!**
-> The bleeding edge may not be stable,
-> as it contains all active development.
-
-However you choose to install it,
-`cd` into the directory.
 
 ### Running
 
@@ -126,7 +118,9 @@ please see the [configuration README](config/README.md).
 Briefly,
 the general configuration file must be located at `config/config.yaml`.
 A samplesheet containing information pertaining to the data must be supplied as well.
-Both are schema validated.
+Finally,
+a sheet providing the output from PolyA_DB must also be supplied.
+All are schema validated.
 
 ## Notes on Data
 

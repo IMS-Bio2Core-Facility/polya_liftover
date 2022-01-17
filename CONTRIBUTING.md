@@ -5,8 +5,8 @@
 > Create a conda environment with:
 >
 >     ```shell
->     conda env create -f workflows/envs/devel.yml
->     conda activate devel
+>     conda env create -f workflows/envs/devel_linux.yml
+>     conda activate devel_linux
 >     pre-commit install --install-hooks
 >     ```
 >
@@ -17,8 +17,8 @@
 >
 > Due to dependencies on Singularity and Nvidia,
 > these steps are Linux-dependent.
-> A workflows/envs/devel_macos.yaml is provided,
-> but it will **not** support Nvidia/Cuda/GPU acceleration.
+> A workflows/envs/devel.yaml is provided,
+> but it will **not** support Singularity.
 
 Welcome, friend!
 Open-source software isn't open open-source without the community.
@@ -55,8 +55,8 @@ Please make sure you activate them before making any changes,
 using the commands below:
 
 ```shell
-conda env create -f workflows/envs/devel.yml
-conda activate devel
+conda env create -f workflows/envs/devel_linux.yml
+conda activate devel_linux
 pre-commit install --install-hooks
 ```
 

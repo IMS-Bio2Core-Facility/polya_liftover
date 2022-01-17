@@ -1,9 +1,10 @@
-name: devel_macos
+name: devel_linux
 channels:
   - bioconda
   - conda-forge
   - defaults
 dependencies:
+  - singularity==3.8.5
   - snakemake==6.11.1
   - ucsc-liftover==377
   - unzip==6.0
