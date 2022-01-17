@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.1 (2022-01-17)
+### Fix
+* **envs:** Update installation instructions ([`9afec83`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/9afec83f168b308d37fea8e8500c52fe6a055c75))
+
+### Documentation
+* **README.md:** Update project information ([`fc3c6b8`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/fc3c6b80a275be64279d0bb2d2e4a23dd4345add))
+* **.snakemake-workflow-catalog.yml:** Correct usage instructions ([`419ea80`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/419ea803566087662a97bd23b0525a39e1dbb342))
+* **LICENSE.md:** Update copyright year ([`19eb5cf`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/19eb5cf33f1af1f150211f6bbf328546bf851a03))
+* **CONTRIBUTING.md:** Correct repo link ([`15fb83b`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/15fb83bf96f1036cd198e61c5d8dcd6deca2b829))
+* **documentation.md:** Update technical documentation ([`0fdb462`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/0fdb462519e7edbc22cffddadeddf8d91045122b))
+* **config/README.md:** Include update parameters ([`4e39a2d`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/4e39a2df0a03b5891cd822caef0c4aa62d377881))
+* **README.md:** Note switch to cellranger ([`a276364`](https://github.com/IMS-Bio2Core-Facility/polya_liftover/commit/a2763647de62b51af73d001cbee81d86848b3916))
+
 ## v2.0.0 (2021-12-22)
 ### Feature
 * **lift.smk:** Mask gtf_converted as tempfile ([`082ef70`](https://github.com/IMS-Bio2Core-Facility/BIC092/commit/082ef70ed59ee3a0b55a19c18bca21fe44f0713e))
