@@ -21,8 +21,29 @@ we can run the whole thing in an isolated environment.
 ## Notes on Installation
 
 Our pipeline is available on Github
-(see below!) and on
-[WorkflowHub][wh].
+(see below!),
+on the [Snakemake Workflow Catalogue][sm_wc],
+and on [WorkflowHub][wh].
+
+A full walktrhough on how to install and use this pipeline can be found
+[here][sm_wc].
+
+To take advantage of Singularity,
+you'll need to install it separately.
+If you are running on a Linux system,
+then Singularity can be installed from conda like so:
+
+```shell
+conda install -n snakemake -c conda-forge singularity
+```
+
+It's a bit more challenging for other operating systems.
+Your best bet is to follow their instructions
+[here][sing_install].
+But don't worry!
+**Singularity is _not_ required!**
+Snakemake will still run each step in its own Conda environment,
+it just won't put each Conda environment in a container.
 
 ### Get the Source Code
 
@@ -40,87 +61,6 @@ git clone https://github.com/IMS-Bio2Core-Facility/polya_liftover
 > :warning: **Heads Up!**
 > The bleeding edge may not be stable,
 > as it contains all active development.
-
-However you choose to install it,
-`cd` into the directory.
-
-### Necessary Software
-
-The only thing you need installed is [conda][conda].
-Snakemake recommends using [mambaforge][mambaforge]
-as your base conda,
-which I would also recommend.
-Installation instructions are at the above link.
-
-Once `conda` is installed,
-the eastiest way to get up and running is:
-
-```shell
-conda env create -f workflow/envs/devel_linux.yaml
-```
-
-This installs [Snakemake][sm]
-and [Singularity][sing],
-plus all the software used in each step.
-If you are running Windows or MacOS,
-please install using the `workflow/envs/devel.yaml` file.
-This installs everything **except** Singularity,
-as Singularity is only compatible with Linux.
-
-While the above is easiest,
-you don't _technially_ need the software for each step,
-as Conda/Snakemake will download each step's software for you as they run.
-For a barebones installation,
-install [Snakemake][sm] as outlined on their page
-and activate your snakemake environment.
-
-If you are running on a Linux system,
-then singularity can be installed from conda like so:
-
-```shell
-conda install -n snakemake -c conda-forge singularity
-```
-
-It's a bit more challenging for other operating systems.
-Your best bet is to follow their instructions
-[here][sing_install].
-But don't worry!
-**Singularity is _not_ required!**
-Snakemake will still run each step in its own Conda environment,
-it just won't put each Conda environment in a container.
-
-### Running
-
-Once you've installed the above software,
-and fetched the code,
-running the pipeline is as simple as:
-
-```shell
-snakemake --use-conda --use-singularity --cores 6
-```
-
-If you aren't using `singularity`,
-then leave off the apropriate flag, as so:
-
-```shell
-snakemake --use-conda --cores 6
-```
-
-And `snakemake` will automatically leave it off.
-
-## Notes on Configuration
-
-> :warning:  **Be sure to change the configuration to suit your project!**
-
-For a full discussion of configuration,
-please see the [configuration README](config/README.md).
-
-Briefly,
-the general configuration file must be located at `config/config.yaml`.
-A samplesheet containing information pertaining to the data must be supplied as well.
-Finally,
-a sheet providing the output from PolyA_DB must also be supplied.
-All are schema validated.
 
 ## Notes on Data
 
@@ -146,6 +86,19 @@ gene coordinates were updated with [PolyA_DB][polya] version 3,
 converted to more recent builds with [Liftover][liftover],
 and referenced/counted with [Cellranger][cr].
 
+## On Reproducibility
+
+Reproducible results are the cornerstone of the scientific process.
+By running the pipeline with `snakemake` in a `singularity`/`docker` image
+using `conda` environments,
+we can pin all software versions,
+maximising reproducibility.
+
+We also strive to make this pipeline as FAIR/O compliant as possible.
+In addition to the usual availability on Github,
+it is available at both the [Snakemake Workflow Catalogue][sm_wc]
+and [WorkflowHub][wh].
+
 ## Future work
 
 - [ ] Improve species and build handling. See [#2][i2]
@@ -158,6 +111,7 @@ and referenced/counted with [Cellranger][cr].
 [conda]: https://docs.conda.io/en/latest/ "Conda"
 [sing]: https://sylabs.io/singularity/ "Singularity"
 [wh]: https://workflowhub.eu/workflows/263 "WorkflowHub"
+[sm_wc]: https://snakemake.github.io/snakemake-workflow-catalog?usage=IMS-Bio2Core-Facility/polya_liftover
 [mambaforge]: https://github.com/conda-forge/miniforge#mambaforge "Mambaforge"
 [sing_install]: https://sylabs.io/guides/3.8/admin-guide/installation.html#installation-on-windows-or-mac "Singularity Install"
 [releases]: https://github.com/IMS-Bio2Core-Facility/polya_liftover/releases "Releases"
